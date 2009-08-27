@@ -10,6 +10,8 @@ plugin 'attachment_fu',
   :git => 'git://github.com/technoweenie/attachment_fu.git'
 plugin 'blueprint-css',
   :git => 'git://github.com/joshuaclayton/blueprint-css.git'
+plugin 'acts_as_tree',
+  :git => 'git://github.com/rails/acts_as_tree.git'
  
 gem 'mislav-will_paginate'
 gem 'rubyist-aasm'
