@@ -1,13 +1,26 @@
+#Setup for windows
+def win_env?
+  RUBY_PLATFORM=~ /win32/
+end
+
+def rake(command, options = {})
+  env = options[:env] || 'development'
+  log 'rake', "#{command} in #{env} environment "
+  sudo = win_env?  ? '' : (options[:sudo] ? 'sudo' : '')
+  rake_cmd = win_env? ? "rake.bat" : 'rake'
+  in_root { run("#{sudo} #{rake_cmd} #{command} RAILS_ENV=#{env}", false) }
+end
+
 # Delete unnecessary files
-  run "rm README"
-  run "rm public/index.html"
-  run "rm public/favicon.ico"
-  run "rm public/robots.txt"
-  run "rm -f public/javascripts/*"
+  run ("rm README")
+  run ("rm public/index.html")
+  run ("rm public/favicon.ico")
+  run ("rm public/robots.txt")
+  run ("rm -f public/javascripts/*")
  
 # Download JQuery
-  run "curl -L http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js > public/javascripts/jquery.js"
-  run "curl -L http://jqueryjs.googlecode.com/svn/trunk/plugins/form/jquery.form.js > public/javascripts/jquery.form.js"
+  run ("curl -L http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js > public/javascripts/jquery.js")
+  run ("curl -L http://jqueryjs.googlecode.com/svn/trunk/plugins/form/jquery.form.js > public/javascripts/jquery.form.js")
 
 
 # Set up git repository
@@ -15,23 +28,23 @@
   git :add => '.'
   
 # Copy database.yml for distribution use
-  run "cp config/database.yml config/database.yml.example"
+  run ("cp config/database.yml config/database.yml.example")
 
 # set up .gitignore
-  run %{find . -type d -empty | xargs -I xxx touch xxx/.gitignore}
+  #run (%{find . -type d -empty | xargs -I xxx touch xxx/.gitignore})
   file '.gitignore', <<-END
-	.DS_Store
-	coverage/*
-	log/*.log
-	db/*.db
-	db/*.sqlite3
-	db/schema.rb
-	tmp/**/*
-	doc/api
-	doc/app
-	config/database.yml
-	coverage/*
-  END
+.DS_Store
+coverage/*
+log/*.log
+db/*.db
+db/*.sqlite3
+db/schema.rb
+tmp/**/*
+doc/api
+doc/app
+config/database.yml
+coverage/*
+END
 
 # Install Plugins as sub modules
   plugin 'rspec', :git => 'git://github.com/dchelimsky/rspec.git', :submodule => true
@@ -47,10 +60,10 @@ git :submodule => "init"
 
 #Install Gems
   gem 'thoughtbot-factory_girl', :lib => 'factory_girl'
-  gem 'thoughtbot-shoulda'
-  gem 'nifty-generators' 
+  gem 'thoughtbot-shoulda', :lib => 'shoulda'
+  #gem 'nifty-generators' :lib => 'nifty-generators'
   gem 'mislav-will_paginate', :lib => 'will_paginate'
-  gem 'rubyist-aasm'
+  gem 'rubyist-aasm', :lib => 'aasm'
   gem 'mysql' 
   gem 'sqlite3-ruby', :lib => 'sqlite3'
   gem 'json'
@@ -60,8 +73,10 @@ git :submodule => "init"
   gem 'cucumber'
   gem 'spork'
   gem 'webrat'
-  gem 'cldwalker-hirb' :lib => "hirb"
-  rake("gems:install", :sudo => true)
+  gem 'cldwalker-hirb', :lib => 'hirb'
+
+#Something's up with this on Windows  
+rake ("gems:install")
  
 # Initialize RSpec  
   generate(:rspec)
@@ -71,33 +86,29 @@ git :submodule => "init"
   #rake ("db:migrate")
   
 # Initialized Cucumber
-  run("spork --bootstrap")
-  generate(:cucumber, "--spork")
+  #run("spork --bootstrap")
+  #generate(:cucumber, "--spork")
   
 # Add Initializers
   initializer 'dp-init.rb', <<-CODE
-  class Object
-    def not_nil?
-      !nil?
-    end
-  
-    def not_blank?
-      !blank?
-    end
+class Object
+  def not_nil?
+    !nil?
   end
+  
+  def not_blank?
+    !blank?
+  end
+end
   CODE
 
 #initialize Sessions
-  rake('db:sessions:create')
-  rake('db:migrate')
-
-# Initialize submodules
-  git :submodule => "init"
-  
+  rake ('db:sessions:create')
+  rake ('db:migrate')  
 
 #### Add and Commit all changes
   git :add => '.'
-  git :commit => "-a -m 'Initial commit -  from http://github.com/bcatherall/dp-rails_app_templates/raw/master/base.rb'"
+  git :commit => "-m 'Initial commit -  from http://github.com/bcatherall/dp-rails_app_templates/raw/master/base.rb'"
 
 # Success
   puts "SUCCESS!"
