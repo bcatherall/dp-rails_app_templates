@@ -12,15 +12,15 @@ def rake(command, options = {})
 end
 
 # Delete unnecessary files
-  run ("rm README")
-  run ("rm public/index.html")
-  run ("rm public/favicon.ico")
-  run ("rm public/robots.txt")
-  run ("rm -f public/javascripts/*")
+  run("rm README")
+  run("rm public/index.html")
+  run("rm public/favicon.ico")
+  run("rm public/robots.txt")
+  run("rm -f public/javascripts/*")
  
 # Download JQuery
-  run ("curl -L http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js > public/javascripts/jquery.js")
-  run ("curl -L http://jqueryjs.googlecode.com/svn/trunk/plugins/form/jquery.form.js > public/javascripts/jquery.form.js")
+  run("curl -L http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js > public/javascripts/jquery.js")
+  run("curl -L http://jqueryjs.googlecode.com/svn/trunk/plugins/form/jquery.form.js > public/javascripts/jquery.form.js")
 
 
 # Set up git repository
@@ -28,14 +28,14 @@ end
   git :add => '.'
   
 # Copy database.yml for distribution use
-  run ("cp config/database.yml config/database.yml.example")
+  run("cp config/database.yml config/database.yml.example")
 
 # set up .gitignore
   #run (%{find . -type d -empty | xargs -I xxx touch xxx/.gitignore})
   file '.gitignore', <<-END
 .DS_Store
 coverage/*
-log/*.log
+log/*
 db/*.db
 db/*.sqlite3
 db/schema.rb
@@ -74,7 +74,7 @@ git :submodule => "init"
   gem 'spork'
   gem 'webrat'
   gem 'cldwalker-hirb', :lib => 'hirb'
-  rake ("gems:install", :sudo => true)
+  rake("gems:install", :sudo => true)
  
 # Initialize RSpec  
   generate(:rspec)
@@ -101,12 +101,12 @@ end
   CODE
 
 #initialize Sessions
-  rake ('db:sessions:create')
-  rake ('db:migrate')  
+  rake('db:sessions:create')
+  rake('db:migrate')  
 
 #### Add and Commit all changes
   git :add => '.'
-  git :commit => "-m 'Initial commit -  from http://github.com/bcatherall/dp-rails_app_templates/raw/master/base.rb'"
+  git :commit => '-m "Initial commit -  from http://github.com/bcatherall/dp-rails_app_templates/raw/master/base.rb"'
 
 # Success
   puts "SUCCESS!"
