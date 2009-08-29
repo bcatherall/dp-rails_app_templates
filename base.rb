@@ -74,9 +74,7 @@ git :submodule => "init"
   gem 'spork'
   gem 'webrat'
   gem 'cldwalker-hirb', :lib => 'hirb'
-
-#Something's up with this on Windows  
-rake ("gems:install")
+  rake ("gems:install", :sudo => true)
  
 # Initialize RSpec  
   generate(:rspec)
