@@ -32,7 +32,7 @@
 
 #### Add and Commit all changes
   git :add => '.'
-  git :commit => '-m "Initial commit -  from http://github.com/bcatherall/dp-rails_app_templates/raw/master/base.rb"'
+  git :commit => '-m "Adding authlogic -  from http://github.com/bcatherall/dp-rails_app_templates/raw/master/authlogic.rb"'
 
 # Success
   puts "SUCCESS!"

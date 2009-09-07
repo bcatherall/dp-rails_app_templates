@@ -8,7 +8,7 @@
 
 #### Add and Commit all changes
   git :add => '.'
-  git :commit => '-m "Initial commit -  from http://github.com/bcatherall/dp-rails_app_templates/raw/master/base.rb"'
+  git :commit => '-m "Adding Ecommerce -  from http://github.com/bcatherall/dp-rails_app_templates/raw/master/ecommerce.rb"'
 
 # Success
   puts "SUCCESS!"
