@@ -14,7 +14,7 @@ end
 # Delete unnecessary files
   run("rm README")
   run("rm public/index.html")
-  run("rm public/favicon.ico")
+#  run("rm public/favicon.ico")
   run("rm public/robots.txt")
   run("rm -f public/javascripts/*")
  
@@ -103,6 +103,12 @@ end
 #initialize Sessions
   rake('db:sessions:create')
   rake('db:migrate')  
+
+#load options
+  load_template "http://github.com/bcatherall/dp-rails_app_templates/raw/master/authentication.rb" if yes? ("Use restful-authentication?")
+  load_template "http://github.com/bcatherall/dp-rails_app_templates/raw/master/authlogic.rb" if yes? ("Use authlogic?")
+  load_template "http://github.com/bcatherall/dp-rails_app_templates/raw/master/ecomerce.rb" if yes? ("Use activemerchant?")
+  load_template "http://github.com/bcatherall/dp-rails_app_templates/raw/master/authorization.rb" if yes? ("Use authorization?")
 
 #### Add and Commit all changes
   git :add => '.'

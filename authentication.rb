@@ -1,6 +1,3 @@
-# Load base template
-  load_template "http://github.com/bcatherall/dp-rails_app_templates/raw/master/base.rb"
-
 # Add Plugins
   plugin 'open_id_authentication', :git => 'git://github.com/rails/open_id_authentication.git', :submodule => true
   plugin 'asset_packager', :git => 'git://github.com/sbecker/asset_packager.git', :submodule => true
@@ -17,9 +14,3 @@
 # Initialize restfull auth  
   generate("authenticated", "user session")
 
-#### Add and Commit all changes
-  git :add => '.'
-  git :commit => '-m "Adding restful auth -  from http://github.com/bcatherall/dp-rails_app_templates/raw/master/authenticatio .rb"'
-
-# Success
-  puts "SUCCESS!"

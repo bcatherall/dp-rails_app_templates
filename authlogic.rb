@@ -1,5 +1,3 @@
-# Load base template
-  load_template "http://github.com/bcatherall/dp-rails_app_templates/raw/master/base.rb"
 
 #Install Gems
   gem 'authlogic-oid', :lib => 'authlogic_openid'
@@ -12,6 +10,7 @@
   rake ("db:migrate")
   generate(:session, "user_session")
   generate(:nifty_scaffold, "user_session --skip-model username:string password:string new destroy")
+
 
 #Add open id
   plugin "open_id_authentication", :git => "git://github.com/rails/open_id_authentication.git", :submodule => true
@@ -26,13 +25,3 @@
   route 'map.logout "logout", :controller => "user_sessions", :action => "destroy"'
   route 'map.resources :user_sessions'
   route 'map.resources :users'
-  route 'map.resources :articles'
-  route 'map.resources :comments'
-  route 'map.root :articles'
-
-#### Add and Commit all changes
-  git :add => '.'
-  git :commit => '-m "Adding authlogic -  from http://github.com/bcatherall/dp-rails_app_templates/raw/master/authlogic.rb"'
-
-# Success
-  puts "SUCCESS!"
