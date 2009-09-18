@@ -107,7 +107,7 @@ end
 #load options
   load_template "http://github.com/bcatherall/dp-rails_app_templates/raw/master/authentication.rb" if yes? ("Use restful-authentication?")
   load_template "http://github.com/bcatherall/dp-rails_app_templates/raw/master/authlogic.rb" if yes? ("Use authlogic?")
-  load_template "http://github.com/bcatherall/dp-rails_app_templates/raw/master/ecomerce.rb" if yes? ("Use activemerchant?")
+  load_template "http://github.com/bcatherall/dp-rails_app_templates/raw/master/ecommerce.rb" if yes? ("Use activemerchant?")
   load_template "http://github.com/bcatherall/dp-rails_app_templates/raw/master/authorization.rb" if yes? ("Use authorization?")
 
 #### Add and Commit all changes
